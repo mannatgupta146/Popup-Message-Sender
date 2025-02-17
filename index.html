@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message Popup</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+</head>
+<body>
+    <a class="button" onclick="toggleMessagePopup()"> Send a Message </a>
+    <div class="hidden" id="messagePopup">
+        <h2>Send Us a Message</h2>
+        <div class="box">
+            <input type="text" id="messageInput" placeholder="Type your message here..." required>
+        </div>
+        <div class="box">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+        <a class="close" onclick="toggleMessagePopup()">
+            <i class="fa fa-times fa-2x"></i>
+        </a>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

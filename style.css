@@ -1,0 +1,82 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: serif;
+    height: 100vh;
+    background-color: #7c3af8;
+}
+
+.button {
+    padding: 15px 20px;
+    font-size: 1.5rem;
+    background-color: #fff;
+    text-decoration: none;
+    color: #5c4800;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: 0.5s;
+}
+
+.button:hover {
+    letter-spacing: 0.1rem;
+}
+
+#messagePopup {
+    position: fixed;
+    top: -100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    z-index: 1000;
+    width: 450px;
+    padding: 80px 50px 50px;
+    transition: 0.5s;
+    border-radius: 4px;
+    visibility: hidden;
+}
+
+#messagePopup.active {
+    visibility: visible;
+    top: 50%;
+}
+
+#messagePopup h2 {
+    text-align: center;
+    color: #5c4800;
+    font-size: 24px;
+    margin: 20px 10px;
+}
+
+#messagePopup .box {
+    margin-top: 20px;
+}
+
+input, button {
+    width: 100%;
+    padding: 15px;
+    outline: none;
+    font-size: 1rem;
+    font-family: serif;
+}
+
+button {
+    border: none;
+    background-color: #7c3af8;
+    color: #ffffff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.close {
+    position: absolute;
+    cursor: pointer;
+    top: 15px;
+    right: 20px;
+}
