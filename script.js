@@ -1,29 +1,36 @@
-function toggleMessagePopup() {
-    const messagePopup = document.getElementById("messagePopup");
-    messagePopup.classList.toggle("active");
+function toggleMessageForm() {
+    const messageForm = document.getElementById("messageForm");
+    messageForm.classList.toggle("active");
 }
 
 function sendMessage() {
-    const message = document.getElementById("messageInput").value.trim();
-    if (!message) {
-        alert("Please enter a message.");
+    const userEmail = document.getElementById("userEmail").value;
+    const userMessage = document.getElementById("userMessage").value;
+
+    if (!userEmail || !userMessage) {
+        alert("Both email and message are required.");
         return;
     }
 
-    // Send message to the backend
+    const messageData = {
+        email: userEmail,
+        message: userMessage,
+    };
+
     fetch("http://localhost:3000/send", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message }),
+        body: JSON.stringify(messageData),
     })
     .then(response => response.json())
     .then(data => {
-        alert(data.message);
-        toggleMessagePopup(); // Close the popup after sending
+        alert(data.message || "Message sent successfully!");
+        toggleMessageForm();  // Close the form after sending the message
     })
     .catch(error => {
-        alert("Error sending message: " + error.message);
+        alert("Error sending message.");
+        console.error(error);
     });
 }

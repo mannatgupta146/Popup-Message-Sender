@@ -1,10 +1,10 @@
-* {
+*{
     box-sizing: border-box;
     padding: 0;
     margin: 0;
 }
 
-body {
+body{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -13,10 +13,12 @@ body {
     background-color: #7c3af8;
 }
 
-.button {
+.button{
+    position: relative;
     padding: 15px 20px;
     font-size: 1.5rem;
     background-color: #fff;
+    display: inline-block;
     text-decoration: none;
     color: #5c4800;
     cursor: pointer;
@@ -24,15 +26,15 @@ body {
     transition: 0.5s;
 }
 
-.button:hover {
+.button:hover{
     letter-spacing: 0.1rem;
 }
 
-#messagePopup {
+#messageForm{    
     position: fixed;
     top: -100%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    left: 50%; 
+    transform: translate(-50%,-50%); 
     background-color: #fff;
     z-index: 1000;
     width: 450px;
@@ -42,39 +44,52 @@ body {
     visibility: hidden;
 }
 
-#messagePopup.active {
+#messageForm.active{
     visibility: visible;
     top: 50%;
 }
 
-#messagePopup h2 {
+#messageForm h2{
     text-align: center;
     color: #5c4800;
     font-size: 24px;
     margin: 20px 10px;
 }
 
-#messagePopup .box {
+#messageForm .box{
+    position: relative;
+    width: 100%;
     margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-input, button {
+input, textarea, button{
     width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
     padding: 15px;
     outline: none;
     font-size: 1rem;
     font-family: serif;
 }
 
-button {
+textarea{
+    height: 100px;
+    resize: none;
+}
+
+button{
     border: none;
+    width: 150px;
+    letter-spacing: 0.1rem;
     background-color: #7c3af8;
     color: #ffffff;
     border-radius: 4px;
     cursor: pointer;
 }
 
-.close {
+.close{
     position: absolute;
     cursor: pointer;
     top: 15px;

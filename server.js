@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
+require("dotenv").config();  // Load environment variables from .env file
 
 const app = express();
 const PORT = 3000;
@@ -9,25 +10,25 @@ const PORT = 3000;
 app.use(bodyParser.json());
 app.use(cors());
 
-// Nodemailer configuration
+// Nodemailer configuration using environment variables
 const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-        user: "mannatgupta146@gmail.com",  // Replace with your email
-        pass: "hello@146",   // Replace with your email password or app password
+        user: process.env.EMAIL_USER,  // Get email from .env
+        pass: process.env.EMAIL_PASS,  // Get password from .env
     },
 });
 
 app.post("/send", (req, res) => {
-    const { message } = req.body;
+    const { email, message } = req.body;
 
-    if (!message) {
-        return res.status(400).json({ message: "Message is required." });
+    if (!email || !message) {
+        return res.status(400).json({ message: "Email and message are required." });
     }
 
     const mailOptions = {
-        from: "mannatgupta146@gmail.com",
-        to: "recipient-email@gmail.com",  // Replace with the email you want to receive messages at
+        from: process.env.EMAIL_USER,  // Use email from .env
+        to: email,  // Send the message to the email provided by the user
         subject: "New Message from Message Popup",
         text: message,
     };
