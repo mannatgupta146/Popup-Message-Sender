@@ -1,7 +1,32 @@
 {
+  "name": "popup-message-sender",
+  "version": "1.0.0",
+  "private": true,
+  "homepage": "https://mannatgupta146.github.io/Popup-Message-Sender",
+  "scripts": {
+    "start": "concurrently \"npm run start-client\" \"npm run start-server\"",
+    "start-client": "cd client && npm start",
+    "start-server": "cd server && node server.js",
+    "build": "cd client && npm run build",
+    "deploy": "gh-pages -d client/build"
+  },
   "dependencies": {
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.7.9",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "nodemailer": "^6.10.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-icons": "^5.5.0"
+    "react-icons": "^5.5.0",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4",
+    "concurrently": "^8.2.0",
+    "gh-pages": "^5.0.0"
   }
 }
