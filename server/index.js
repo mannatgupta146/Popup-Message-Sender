@@ -5,7 +5,7 @@ const nodemailer = require("nodemailer");
 require("dotenv").config();
 
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 5000;
 
 app.use(cors({ origin: "http://localhost:3000" })); // Allow frontend requests
 app.use(bodyParser.json());
