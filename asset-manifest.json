@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Popup-Message-Sender/static/css/main.74ef6a51.css",
+    "main.js": "/Popup-Message-Sender/static/js/main.96542954.js",
+    "index.html": "/Popup-Message-Sender/index.html",
+    "main.74ef6a51.css.map": "/Popup-Message-Sender/static/css/main.74ef6a51.css.map",
+    "main.96542954.js.map": "/Popup-Message-Sender/static/js/main.96542954.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.74ef6a51.css",
+    "static/js/main.96542954.js"
+  ]
+}
