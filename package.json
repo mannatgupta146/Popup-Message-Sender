@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
-  "main": "index.js",
+  "main": "./server/index.js",
   "scripts": {
-    "server": "nodemon index.js"
+    "start": "nodemon ./server/index.js"
   },
   "dependencies": {
     "abab": "^2.0.6",
