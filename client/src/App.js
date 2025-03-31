@@ -94,8 +94,8 @@ function App() {
   );
 }
 // Add this ABOVE your existing POST route
-app.get("/", (req, res) => {
-  res.send("Backend is running!");
-});
+// app.get("/", (req, res) => {
+//   res.send("Backend is running!");
+// });
 
 export default App;
