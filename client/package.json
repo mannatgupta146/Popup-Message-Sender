@@ -5,11 +5,7 @@
   "homepage": "https://mannatgupta146.github.io/Popup-Message-Sender",
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "build": "react-scripts build"
   },
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
