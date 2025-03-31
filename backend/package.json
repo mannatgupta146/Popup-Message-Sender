@@ -1,0 +1,20 @@
+{
+  "name": "b",
+  "version": "1.0.0",
+  "main": "./server/index.js",
+  "scripts": {
+    "build": "node ./server/index.js",
+    "start": "node ./server/index.js",
+    "dev": "nodemon ./server/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "nodemailer": "^6.10.0",
+    "nodemon": "^3.1.9"
+  }
+}
