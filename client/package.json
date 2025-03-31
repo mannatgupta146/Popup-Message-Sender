@@ -2,7 +2,6 @@
   "name": "popup-message-sender",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://mannatgupta146.github.io/Popup-Message-Sender",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build"
