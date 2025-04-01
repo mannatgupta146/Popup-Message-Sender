@@ -1,58 +1,66 @@
-import React, { useState } from "react"
-import { FaTimes } from "react-icons/fa"
-import "./App.css"
+import React, { useState } from "react";
+import { FaTimes } from "react-icons/fa";
+import "./App.css";
 
 function App() {
-  const [showForm, setShowForm] = useState(false)
-  const [email, setEmail] = useState("")
-  const [message, setMessage] = useState("")
-  const [isShaking, setIsShaking] = useState(false)
+  const [showForm, setShowForm] = useState(false);
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [isShaking, setIsShaking] = useState(false);
 
   const toggleMessageForm = () => {
-    setShowForm(!showForm)
-  }
+    setShowForm(!showForm);
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-  
+    e.preventDefault();
+
     if (!email.trim() || !message.trim()) {
-      setIsShaking(true)
-      setTimeout(() => setIsShaking(false), 400)
-      return
+      setIsShaking(true);
+      setTimeout(() => setIsShaking(false), 400);
+      return;
     }
-  
-    const apiUrl =
-      process.env.NODE_ENV === "development"
-        ? "http://localhost:4000/send"
-        : "https://popup-message-sender.vercel.app/send" // Change this if needed for production
-  
+
     try {
-      const response = await fetch(apiUrl, {
+      const response = await fetch("https://popup-message-sender.vercel.app/send", { 
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, message }),
-      })
-  
-      const data = await response.json()
-      alert(data.message || "✓ Message sent successfully!")
-      setEmail("")
-      setMessage("")
-      toggleMessageForm()
+        body: JSON.stringify({ email, message })
+      });
+
+      // Check if response is actually JSON
+      const contentType = response.headers.get("content-type");
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      if (!contentType || !contentType.includes("application/json")) {
+        throw new Error("Invalid JSON response received from server.");
+      }
+
+      const text = await response.text();
+      console.log("Raw response:", text);
+
+      if (!text) {
+        throw new Error("Empty response from server.");
+      }
+
+      const data = JSON.parse(text);
+      alert(data.message || "✓ Message sent successfully!");
+      setEmail("");
+      setMessage("");
+      toggleMessageForm();
     } catch (error) {
-      alert("⚠️ Error sending message. Please try again.")
-      console.error("Error:", error)
+      alert("⚠️ Error sending message. Please try again.");
+      console.error("Error:", error);
     }
-  }
-  
+  };
 
   return (
     <div className="container">
-      {/* Main Button */}
       <button className="button" onClick={toggleMessageForm}>
         Send a Message
       </button>
 
-      {/* Popup Form */}
       <div
         className={`messageForm ${showForm ? "active" : ""} ${
           isShaking ? "error-shake" : ""
@@ -92,14 +100,9 @@ function App() {
         </div>
       </div>
 
-      {/* Backdrop Overlay */}
       {showForm && <div className="backdrop" onClick={toggleMessageForm} />}
     </div>
-  )
+  );
 }
-// Add this ABOVE your existing POST route
-// app.get("/", (req, res) => {
-//   res.send("Backend is running!");
-// });
 
-export default App
+export default App;
