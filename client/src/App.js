@@ -14,23 +14,25 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-
+  
     if (!email.trim() || !message.trim()) {
       setIsShaking(true)
       setTimeout(() => setIsShaking(false), 400)
       return
     }
-
+  
+    const apiUrl =
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:4000/send"
+        : "https://popup-message-sender.vercel.app/send" // Change this if needed for production
+  
     try {
-      const response = await fetch(
-        "https://popup-message-sender.vercel.app/send",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, message }),
-        }
-      )
-
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, message }),
+      })
+  
       const data = await response.json()
       alert(data.message || "✓ Message sent successfully!")
       setEmail("")
@@ -41,6 +43,7 @@ function App() {
       console.error("Error:", error)
     }
   }
+  
 
   return (
     <div className="container">
