@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "main": "./server/index.js",
   "scripts": {
-    "build": "node ./server/index.js",
-    "start": "node ./server/index.js",
-    "dev": "nodemon ./server/index.js"
+    "start": "node server/index.js",
+    "vercel-build": "npm install"
   },
   "author": "",
   "license": "ISC",
