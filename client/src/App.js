@@ -27,13 +27,14 @@ function App() {
           ? "http://localhost:4000/send"
           : "https://popup-message-sender.vercel.app/send";
 
+      console.log("🚀 Sending request to:", API_URL);
+
       const response = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, message }),
       });
 
-      // Log raw response before parsing JSON
       const text = await response.text();
       console.log("📩 Raw server response:", text);
 
@@ -51,7 +52,7 @@ function App() {
       toggleMessageForm();
     } catch (error) {
       alert("⚠️ Error sending message. Please try again.");
-      console.error("Error:", error);
+      console.error("🚨 Error:", error);
     }
   };
 
@@ -61,11 +62,7 @@ function App() {
         Send a Message
       </button>
 
-      <div
-        className={`messageForm ${showForm ? "active" : ""} ${
-          isShaking ? "error-shake" : ""
-        }`}
-      >
+      <div className={`messageForm ${showForm ? "active" : ""} ${isShaking ? "error-shake" : ""}`}>
         <div className="form-content">
           <h2>Send a Message</h2>
 
