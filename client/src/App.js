@@ -22,24 +22,24 @@ function App() {
     }
 
     try {
-      const response = await fetch("https://popup-message-sender.vercel.app/send", { 
+      const API_URL =
+        process.env.NODE_ENV === "development"
+          ? "http://localhost:4000/send"
+          : "https://popup-message-sender.vercel.app/send";
+
+      const response = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, message })
+        body: JSON.stringify({ email, message }),
       });
 
-      // Check if response is actually JSON
-      const contentType = response.headers.get("content-type");
+      // Log raw response before parsing JSON
+      const text = await response.text();
+      console.log("📩 Raw server response:", text);
+
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-      if (!contentType || !contentType.includes("application/json")) {
-        throw new Error("Invalid JSON response received from server.");
-      }
-
-      const text = await response.text();
-      console.log("Raw response:", text);
-
       if (!text) {
         throw new Error("Empty response from server.");
       }
