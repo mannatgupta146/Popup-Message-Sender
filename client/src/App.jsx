@@ -22,6 +22,8 @@ function App() {
     }
 
     try {
+      console.log("🚀 Sending message:", { email, message });
+      console.log("node_env...",process.env.NODE_ENV);
       const API_URL =
         process.env.NODE_ENV === "development"
           ? "http://localhost:4000/send"
@@ -35,18 +37,18 @@ function App() {
         body: JSON.stringify({ email, message }),
       });
 
-      const text = await response.text();
-      console.log("📩 Raw server response:", text);
-
+      const text = await response.json();
+      
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       if (!text) {
         throw new Error("Empty response from server.");
       }
+      console.log("📩 Raw server response:", text);
 
-      const data = JSON.parse(text);
-      alert(data.message || "✓ Message sent successfully!");
+      // const data = JSON.parse(text);
+      alert(text.message || "✓ Message sent successfully!");
       setEmail("");
       setMessage("");
       toggleMessageForm();
