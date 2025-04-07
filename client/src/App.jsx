@@ -27,7 +27,7 @@ function App() {
       const API_URL =
         process.env.NODE_ENV === "development"
           ? "http://localhost:4000/send"
-          : "https://popup-message-sender.vercel.app/send";
+          : "https://popup-message-sender-w2ib.vercel.app/send";
 
       console.log("🚀 Sending request to:", API_URL);
 
