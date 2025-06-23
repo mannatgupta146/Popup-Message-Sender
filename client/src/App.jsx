@@ -24,10 +24,8 @@ function App() {
     try {
       console.log("🚀 Sending message:", { email, message });
       console.log("node_env...",process.env.NODE_ENV);
-      const API_URL =
-        process.env.NODE_ENV === "development"
-          ? "http://localhost:4000/send"
-          : "https://popup-message-sender.onrender.com/send";
+      const API_URL = "https://popup-message-sender.onrender.com/send";
+
 
       console.log("🚀 Sending request to:", API_URL);
 
