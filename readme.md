@@ -26,7 +26,7 @@ A sleek, full-stack messaging application that lets users send emails through a 
 - **Deployment:** Render (for both frontend & backend)
 
 
-## 🧪 How It Works
+## ⚙️ How It Works
 
 1. User clicks the **"Send a Message"** button.
 2. A form pops up allowing input of email & message.
@@ -96,6 +96,11 @@ To contribute:
 3. Make your changes  
 4. Commit and push (`git commit -m "Add feature"`)  
 5. Open a pull request 🎉  
+
+## 🙏 Credits
+
+- Special thanks to my friend **Abhay Bansal** for his help and support during the development of this project.  
+  🔗 [GitHub – Targter](https://github.com/Targter)
 
 ---
 
