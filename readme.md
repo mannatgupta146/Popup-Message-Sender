@@ -40,8 +40,7 @@ A sleek, full-stack messaging application that lets users send emails through a 
 
 Create a `.env` file in the `backend/` folder:
 
-```EMAIL_USER=your_email@gmail.com```
-```EMAIL_PASS=your_app_password```
+```EMAIL_USER=your_email@gmail.com and EMAIL_PASS=your_app_password```
 
 > 💡 If using Gmail, enable **App Passwords** from your Google account settings.
 
@@ -100,5 +99,4 @@ To contribute:
 
 ---
 
-> 🎉 *When the popup appears... it should feel like "Hey, it's me!"*
-
+> 👋 *When the popup appears... it should feel like "Hey, it's me!"*
