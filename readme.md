@@ -103,5 +103,5 @@ To contribute:
   🔗 [GitHub – Targter](https://github.com/Targter)
 
 ---
-
+⏳ **Note: It may take a little time to send, but trust me — it's worth it!**
 > 👋 *When the popup appears... it should feel like "Hey, it's me!"*
