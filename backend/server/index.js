@@ -1,73 +1,78 @@
 const express = require("express");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
+const validator = require("validator");
 require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-// Middleware
+/* ────────────── CORS ────────────── */
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://popup-message-sender-1.onrender.com" 
+  "https://popup-message-sender-1.onrender.com"
 ];
 
 app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
+  origin: (origin, cb) =>
+    !origin || allowedOrigins.includes(origin)
+      ? cb(null, true)
+      : cb(new Error("Not allowed by CORS")),
   credentials: true
 }));
 
+/* ────────────── Body Parsing ────────────── */
 app.use(express.json());
-app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public"));
 
-// Check for environment variables
+/* ────────────── .env Check ────────────── */
 if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-  console.error("❌ EMAIL_USER or EMAIL_PASS not set! Check your .env file.");
+  console.error("❌ Missing EMAIL_USER or EMAIL_PASS in .env");
   process.exit(1);
 }
 
-// Nodemailer transporter setup
-let transporter;
-try {
-  transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
-    },
-  });
-} catch (error) {
-  console.error("❌ Failed to configure email transporter:", error);
-  process.exit(1);
-}
+/* ────────────── Nodemailer ────────────── */
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
+  }
+});
 
-// Root route
-app.get("/", (req, res) => {
+/* ────────────── Routes ────────────── */
+app.get("/", (_, res) => {
   res.send("✅ Backend is working! 🚀");
 });
 
-// Email sending endpoint
 app.post("/send", async (req, res) => {
-  const { email, message } = req.body;
-  console.log("📩 Received email request from:", email);
+  const { name, email, message } = req.body;
+  console.log("📩 Incoming message from:", name, email);
 
-  if (!email || !message) {
-    return res.status(400).json({ message: "⚠️ Email and message are required." });
+  if (!name || !email || !message) {
+    return res.status(400).json({ message: "⚠️ Name, email, and message are required." });
+  }
+
+  if (!validator.isEmail(email)) {
+    return res.status(400).json({ message: "⚠️ Please enter a valid email address." });
+  }
+
+  // ✅ Strictly allow only gmail.com and cuchd.in domains
+  const domain = email.split("@")[1]?.toLowerCase();
+  const allowedDomains = ["gmail.com", "cuchd.in"];
+  const isAllowedDomain = allowedDomains.includes(domain);
+
+  if (!isAllowedDomain) {
+    return res.status(400).json({ message: "⚠️ Only Gmail or cuchd.in emails are allowed." });
   }
 
   const mailOptions = {
     from: process.env.EMAIL_USER,
-    to: process.env.EMAIL_USER, // Receiver
+    to: process.env.EMAIL_USER,
     replyTo: email,
-    subject: "📬 New Message from pop message sender",
-    text: `You have received a new message from ${email}:\n\n${message}`,
+    subject: `📬 New Message from ${name}`,
+    text: `Name: ${name}\nEmail: ${email}\n\n${message}`
   };
 
   try {
@@ -80,7 +85,7 @@ app.post("/send", async (req, res) => {
   }
 });
 
-// Start server
+/* ────────────── Start Server ────────────── */
 app.listen(PORT, () => {
   console.log(`✅ Server running on http://localhost:${PORT}`);
 });
