@@ -75,12 +75,12 @@ function App() {
   return (
     <div className="container">
       <button className="button" onClick={toggleMessageForm}>
-        Send a Message
+        Open Sesame!
       </button>
 
       <div className={`messageForm ${showForm ? "active" : "inactive"} ${isShaking ? "error-shake" : ""}`}>
         <div className="form-content">
-          <h2>Send a Message</h2>
+          <h2>Pop-Up Message Sender</h2>
 
           <form onSubmit={handleSubmit}>
             <div className="box">
