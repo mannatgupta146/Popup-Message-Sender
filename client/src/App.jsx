@@ -75,7 +75,7 @@ function App() {
   return (
     <div className="container">
       <button className="button" onClick={toggleMessageForm}>
-        Open Sesame!
+        Open the Portal!
       </button>
 
       <div className={`messageForm ${showForm ? "active" : "inactive"} ${isShaking ? "error-shake" : ""}`}>
